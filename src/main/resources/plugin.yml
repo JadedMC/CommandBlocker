@@ -1,0 +1,7 @@
+name: CommandBlocker
+version: '${project.version}'
+main: net.jadedmc.commandblocker.CommandBlocker
+api-version: 1.19
+authors: [JadedMC]
+description: Prevent specific commands from being used
+website: http://www.jadedmc.net

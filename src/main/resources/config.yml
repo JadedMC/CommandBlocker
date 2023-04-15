@@ -1,0 +1,26 @@
+# Changes how the plugin should behave.
+# Options:
+#  - BLACKLIST (Blocks provided commands)
+#  - WHITELIST (Only allow provided commands)
+Mode: BLACKLIST
+
+#
+Commands:
+  - /pl
+  - /plugins
+  - /?
+  - /bukkit:?
+  - /bukkit:plugins
+  - /bukkit:help
+  - /ver
+  - /version
+  - /bukkit:version
+  - /bukkit:ver
+  - /purpur
+  - /pufferfish
+  - /spigot
+  - /paper
+  - /paper:paper
+  - /spigot:spigot
+  - /purpur:purpur
+  - /pufferfish:pufferfish
