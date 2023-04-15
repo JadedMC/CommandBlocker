@@ -4,7 +4,9 @@
 #  - WHITELIST (Only allow provided commands)
 Mode: BLACKLIST
 
-#
+Message: "<red><bold>Error</bold> <dark_gray>» <red>You do not have access to that command."
+
+# The list of commands the plugin should look for.
 Commands:
   - /pl
   - /plugins
