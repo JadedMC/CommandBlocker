@@ -5,3 +5,8 @@ api-version: 1.19
 authors: [JadedMC]
 description: Prevent specific commands from being used
 website: http://www.jadedmc.net
+
+commands:
+  commandblocker:
+    description: Main plugin command.
+    aliases: [cb]
