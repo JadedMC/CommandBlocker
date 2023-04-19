@@ -68,6 +68,10 @@ public class CommandBlockerCMD implements CommandExecutor {
 
             String toBlock = args[1];
 
+            if(!toBlock.startsWith("/")) {
+                toBlock = "/" + toBlock;
+            }
+
             List<String> commands = plugin.getSettingsManager().getConfig().getStringList("Commands");
             commands.add(toBlock.toLowerCase());
 
