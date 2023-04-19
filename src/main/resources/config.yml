@@ -30,3 +30,7 @@ Commands:
   - /spigot:spigot
   - /ver
   - /version
+
+# Hides all commands that have a ':' in them.
+# Such as: /bukkit:version, /minecraft:tp, etc
+HideColonCommands: false

@@ -26,6 +26,7 @@ public class PlayerCommandSendListener implements Listener {
         List<String> commands = plugin.getSettingsManager().getConfig().getStringList("Commands");
         List<String> tablist = new ArrayList<>(event.getCommands());
 
+        // If in whitelist mode, removes all non-whitelisted commands.
         if(mode.equalsIgnoreCase("WHITELIST")) {
             event.getCommands().removeIf(commands::contains);
 
@@ -36,13 +37,21 @@ public class PlayerCommandSendListener implements Listener {
 
                 event.getCommands().remove(command);
             }
-
-            return;
         }
 
+        // If in blacklist mode, removes all blacklisted commands.
         if(mode.equalsIgnoreCase("BLACKLIST")) {
             for(String command : commands) {
                 event.getCommands().remove(command.replace("/", ""));
+            }
+        }
+
+        // Hides all commands with a ':' in them if enabled.
+        if(plugin.getSettingsManager().getConfig().getBoolean("HideColonCommands")) {
+            for(String command : tablist) {
+                if(command.contains(":")) {
+                    event.getCommands().remove(command);
+                }
             }
         }
     }
