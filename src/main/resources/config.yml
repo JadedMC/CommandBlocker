@@ -8,21 +8,25 @@ Message: "<red><bold>Error</bold> <dark_gray>» <red>You do not have access to t
 
 # The list of commands the plugin should look for.
 Commands:
-  - /pl
-  - /plugins
   - /?
+  - /about
   - /bukkit:?
-  - /bukkit:plugins
+  - /bukkit:about
   - /bukkit:help
-  - /ver
-  - /version
-  - /bukkit:version
+  - /bukkit:pl
+  - /bukkit:plugins
   - /bukkit:ver
-  - /purpur
-  - /pufferfish
-  - /spigot
+  - /bukkit:version
+  - /help
   - /paper
   - /paper:paper
-  - /spigot:spigot
-  - /purpur:purpur
+  - /pl
+  - /plugins
+  - /pufferfish
   - /pufferfish:pufferfish
+  - /purpur
+  - /purpur:purpur
+  - /spigot
+  - /spigot:spigot
+  - /ver
+  - /version
