@@ -7,6 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * This class runs the /commandblocker command, which is the main admin command for the plugin.
  * aliases:
@@ -57,6 +59,23 @@ public class CommandBlockerCMD implements CommandExecutor {
         // Displays the plugin's current version.
         else if (subCommand.equalsIgnoreCase("version")) {
             ChatUtils.chat(sender, "<green><bold>CommandBlocker</bold> <dark_gray>» <green>Current version: <white>" + plugin.getDescription().getVersion());
+        }
+
+        else if(subCommand.equalsIgnoreCase("add")) {
+            if(args.length != 2) {
+                return true;
+            }
+
+            String toBlock = args[1];
+
+            List<String> commands = plugin.getSettingsManager().getConfig().getStringList("Commands");
+            commands.add(toBlock.toLowerCase());
+
+            plugin.getSettingsManager().getConfig().set("Commands", commands);
+            plugin.getSettingsManager().save();
+            plugin.getSettingsManager().reload();
+
+            ChatUtils.chat(sender, "<green><bold>CommandBlocker</bold> <dark_gray>» <green>Added <white>" + toBlock.toLowerCase() + " <green>to the command list.");
         }
 
         // Displays the help menu.

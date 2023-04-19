@@ -1,10 +1,12 @@
 package net.jadedmc.commandblocker;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Manages the configurable settings in the plugin.
@@ -38,5 +40,13 @@ public class SettingsManager {
      */
     public void reload() {
         config = YamlConfiguration.loadConfiguration(configFile);
+    }
+
+    public void save() {
+        try {
+            config.save(configFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
