@@ -14,6 +14,9 @@ public final class CommandBlocker extends JavaPlugin {
 
         getCommand("commandblocker").setExecutor(new CommandBlockerCMD(this));
         getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessListener(this), this);
+
+        // Enables bStats statistics tracking.
+        new Metrics(this, 18230);
     }
 
     public SettingsManager getSettingsManager() {
