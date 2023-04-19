@@ -35,13 +35,12 @@ public class PlayerCommandPreprocessListener implements Listener {
         else if (mode.equalsIgnoreCase("whitelist")) {
             for(String whitelist : plugin.getSettingsManager().getConfig().getStringList("Commands")) {
                 if(command.equalsIgnoreCase(whitelist)) {
-                    continue;
+                    return;
                 }
-
-                ChatUtils.chat(event.getPlayer(), plugin.getSettingsManager().getConfig().getString("Message"));
-                event.setCancelled(true);
-                break;
             }
+
+            ChatUtils.chat(event.getPlayer(), plugin.getSettingsManager().getConfig().getString("Message"));
+            event.setCancelled(true);
         }
     }
 }
