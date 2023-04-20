@@ -10,3 +10,13 @@ commands:
   commandblocker:
     description: Main plugin command.
     aliases: [cb]
+
+permissions:
+  commandblocker.admin:
+    description: Gives the player access to the main plugin command.
+    default: op
+  commandblocker.*:
+    description: Gives the player all plugin permissions.
+    default: false
+    children:
+      commandblocker.admin: true
