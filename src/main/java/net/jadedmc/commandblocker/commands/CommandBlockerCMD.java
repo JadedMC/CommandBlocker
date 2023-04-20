@@ -119,8 +119,10 @@ public class CommandBlockerCMD implements CommandExecutor {
             // Displays the help menu.
             default:
                 ChatUtils.chat(sender, "<green><bold>CommandBlocker Commands");
-                ChatUtils.chat(sender, "<green>/cb reload <dark_gray>» <white>Reloads all configuration files.");
-                ChatUtils.chat(sender, "<green>/cb version <dark_gray>» <white>Displays the plugin version.");
+                ChatUtils.chat(sender, "<green><click:suggest_command:\"/cb add \">/cb add [command]</click> <dark_gray>» <white>Add a command to the command list.");
+                ChatUtils.chat(sender, "<green><click:suggest_command:\"/cb mode \">/cb mode [mode]</click> <dark_gray>» <white>Change the mode the plugin is set to.");
+                ChatUtils.chat(sender, "<green><click:suggest_command:\"/cb reload\">/cb reload</click> <dark_gray>» <white>Reloads all configuration files.");
+                ChatUtils.chat(sender, "<green><click:suggest_command:\"/cb version\">/cb version</click> <dark_gray>» <white>Displays the plugin version.");
                 return true;
         }
     }
