@@ -2,6 +2,7 @@
 # Options:
 #  - BLACKLIST (Blocks provided commands)
 #  - WHITELIST (Only allow provided commands)
+#  - HIDE (Hides the provided commands from tab complete, but doesn't block them)
 Mode: BLACKLIST
 
 Message: "<red><bold>Error</bold> <dark_gray>» <red>You do not have access to that command."

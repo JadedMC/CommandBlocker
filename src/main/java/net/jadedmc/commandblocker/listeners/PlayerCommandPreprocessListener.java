@@ -17,7 +17,7 @@ public class PlayerCommandPreprocessListener implements Listener {
     public void onCommandSend(PlayerCommandPreprocessEvent event) {
         String mode = plugin.getSettingsManager().getConfig().getString("Mode");
 
-        if(mode == null) {
+        if(mode == null || mode.equalsIgnoreCase("HIDE")) {
             return;
         }
 

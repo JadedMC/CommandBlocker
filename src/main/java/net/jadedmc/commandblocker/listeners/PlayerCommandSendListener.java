@@ -52,8 +52,8 @@ public class PlayerCommandSendListener implements Listener {
             }
         }
 
-        // If in blacklist mode, removes all blacklisted commands.
-        if(mode.equalsIgnoreCase("BLACKLIST")) {
+        // If in blacklist or hide mode, removes all blacklisted commands.
+        if(mode.equalsIgnoreCase("BLACKLIST") || mode.equalsIgnoreCase("HIDE")) {
             for(String command : commands) {
                 event.getCommands().remove(command.replace("/", ""));
             }
