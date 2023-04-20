@@ -63,6 +63,7 @@ public class CommandBlockerCMD implements CommandExecutor {
 
         else if(subCommand.equalsIgnoreCase("add")) {
             if(args.length != 2) {
+                ChatUtils.chat(sender, "<red><bold>Usage</bold> <dark_gray>» <red>/cb add [command]");
                 return true;
             }
 
