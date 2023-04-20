@@ -5,9 +5,11 @@ import net.jadedmc.commandblocker.utils.ChatUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,7 +17,7 @@ import java.util.List;
  * aliases:
  * - cb
  */
-public class CommandBlockerCMD implements CommandExecutor {
+public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
     private final CommandBlocker plugin;
 
     /**
@@ -125,5 +127,40 @@ public class CommandBlockerCMD implements CommandExecutor {
                 ChatUtils.chat(sender, "<green><click:suggest_command:\"/cb version\">/cb version</click> <dark_gray>» <white>Displays the plugin version.");
                 return true;
         }
+    }
+
+    /**
+     * Processes command tab completion.
+     * @param sender Command sender.
+     * @param cmd Command.
+     * @param label Command label.
+     * @param args Arguments of the command.
+     * @return Tab completion.
+     */
+    @Override
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+
+        // Return an empty list if the player does not have permission.
+        if(!sender.hasPermission("commandblocker.admin")) {
+            return Collections.emptyList();
+        }
+
+        // Lists all sub commands if the player hasn't picked one yet.
+        if(args.length < 2) {
+            return Arrays.asList("add", "help", "mode", "reload", "version");
+        }
+
+        // Only check the first argument of each sub command.
+        if(args.length == 2) {
+            String subCommand = args[0].toLowerCase();
+
+            // Displays tab complete for the mode sub command.
+            if(subCommand.equals("mode")) {
+                return Arrays.asList("BLACKLIST", "HIDE", "WHITELIST");
+            }
+        }
+
+        // Otherwise, send an empty list.
+        return Collections.emptyList();
     }
 }
