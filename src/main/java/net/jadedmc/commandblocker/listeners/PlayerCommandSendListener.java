@@ -26,6 +26,19 @@ public class PlayerCommandSendListener implements Listener {
         List<String> commands = plugin.getSettingsManager().getConfig().getStringList("Commands");
         List<String> tablist = new ArrayList<>(event.getCommands());
 
+        // Hides all commands with a ':' in them if enabled.
+        if(plugin.getSettingsManager().getConfig().getBoolean("HideColonCommands")) {
+            for(String command : tablist) {
+                if(command.contains(":")) {
+                    event.getCommands().remove(command);
+                }
+            }
+        }
+
+        if(event.getPlayer().hasPermission("commandblocker.bypass")) {
+            return;
+        }
+
         // If in whitelist mode, removes all non-whitelisted commands.
         if(mode.equalsIgnoreCase("WHITELIST")) {
             event.getCommands().removeIf(commands::contains);
@@ -43,15 +56,6 @@ public class PlayerCommandSendListener implements Listener {
         if(mode.equalsIgnoreCase("BLACKLIST")) {
             for(String command : commands) {
                 event.getCommands().remove(command.replace("/", ""));
-            }
-        }
-
-        // Hides all commands with a ':' in them if enabled.
-        if(plugin.getSettingsManager().getConfig().getBoolean("HideColonCommands")) {
-            for(String command : tablist) {
-                if(command.contains(":")) {
-                    event.getCommands().remove(command);
-                }
             }
         }
     }

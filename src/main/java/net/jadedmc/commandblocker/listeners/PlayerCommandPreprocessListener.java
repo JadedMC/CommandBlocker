@@ -21,6 +21,10 @@ public class PlayerCommandPreprocessListener implements Listener {
             return;
         }
 
+        if(event.getPlayer().hasPermission("commandblocker.bypass")) {
+            return;
+        }
+
         String command = event.getMessage().split(" ")[0];
 
         if(mode.equalsIgnoreCase("blacklist")) {
