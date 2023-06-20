@@ -4,6 +4,7 @@ import net.jadedmc.commandblocker.commands.CommandBlockerCMD;
 import net.jadedmc.commandblocker.listeners.PlayerCommandPreprocessListener;
 import net.jadedmc.commandblocker.listeners.PlayerCommandSendListener;
 import net.jadedmc.commandblocker.utils.ChatUtils;
+import net.jadedmc.commandblocker.utils.VersionUtils;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,7 +24,11 @@ public final class CommandBlocker extends JavaPlugin {
 
         getCommand("commandblocker").setExecutor(new CommandBlockerCMD(this));
         getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessListener(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerCommandSendListener(this), this);
+
+        // This event only exists on 1.13+.
+        if(VersionUtils.getServerVersion() >= 13) {
+            getServer().getPluginManager().registerEvents(new PlayerCommandSendListener(this), this);
+        }
 
         // Enables bStats statistics tracking.
         new Metrics(this, 18230);
