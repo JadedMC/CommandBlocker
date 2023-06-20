@@ -1,11 +1,16 @@
 package net.jadedmc.commandblocker.utils;
 
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.command.CommandSender;
 
 public class ChatUtils {
+    private static BukkitAudiences adventure;
+
+    public static void setAdventure(BukkitAudiences adv) {
+        adventure = adv;
+    }
 
     /**
      * A quick way to send a CommandSender a colored message.
@@ -13,7 +18,7 @@ public class ChatUtils {
      * @param message The message being sent.
      */
     public static void chat(CommandSender sender, String message) {
-        sender.spigot().sendMessage(translate(message));
+        adventure.sender(sender).sendMessage(translate(message));
     }
 
     /**
@@ -21,8 +26,8 @@ public class ChatUtils {
      * @param message Message to translate.
      * @return Translated Message.
      */
-    public static BaseComponent[] translate(String message) {
-        return BungeeComponentSerializer.get().serialize(MiniMessage.miniMessage().deserialize(replaceLegacy(message)));
+    public static Component translate(String message) {
+        return MiniMessage.miniMessage().deserialize(replaceLegacy(message));
     }
 
     /**
