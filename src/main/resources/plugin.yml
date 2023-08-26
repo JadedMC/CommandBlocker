@@ -6,6 +6,8 @@ authors: [JadedMC]
 description: Prevent specific commands from being used
 website: http://www.jadedmc.net
 
+folia-supported: true
+
 commands:
   commandblocker:
     description: Main plugin command.
