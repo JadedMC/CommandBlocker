@@ -13,7 +13,7 @@ public class VersionUtils {
      * @return Server's major version.
      */
     public static int getServerVersion() {
-        String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
-        return Integer.parseInt(version.replace("1_", "").replaceAll("_R\\d", "").replace("v", ""));
+        String version = Bukkit.getServer().getBukkitVersion().split("-")[0];
+        return Integer.parseInt(version.split("\\.")[1]);
     }
 }
