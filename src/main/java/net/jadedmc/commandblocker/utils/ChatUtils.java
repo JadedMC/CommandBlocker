@@ -3,7 +3,6 @@ package net.jadedmc.commandblocker.utils;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 import java.util.regex.Matcher;
@@ -41,8 +40,7 @@ public class ChatUtils {
      */
     public static String replaceLegacy(String message) {
         // Get the server version.
-        String version = Bukkit.getServer().getBukkitVersion().split("-")[0];
-        int subVersion = Integer.parseInt(version.split("\\.")[1]);
+        int subVersion = VersionUtils.getServerVersion();
 
         // If the version is 1.16 or greater, check for hex color codes.
         if(subVersion >= 16) {
