@@ -23,6 +23,10 @@ public class PlayerCommandSendListener implements Listener {
             return;
         }
 
+        if(event.getPlayer().hasPermission("commandblocker.bypass")) {
+            return;
+        }
+
         List<String> commands = plugin.getSettingsManager().getConfig().getStringList("Commands");
         List<String> tablist = new ArrayList<>(event.getCommands());
 
@@ -33,10 +37,6 @@ public class PlayerCommandSendListener implements Listener {
                     event.getCommands().remove(command);
                 }
             }
-        }
-
-        if(event.getPlayer().hasPermission("commandblocker.bypass")) {
-            return;
         }
 
         // If in whitelist mode, removes all non-whitelisted commands.
