@@ -1,6 +1,6 @@
 name: CommandBlocker
 version: '${project.version}'
-main: net.jadedmc.commandblocker.CommandBlocker
+main: net.jadedmc.commandblocker.CommandBlockerPlugin
 api-version: 1.13
 authors: [JadedMC]
 description: Prevent specific commands from being used
