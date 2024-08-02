@@ -2,6 +2,14 @@
 
 CommandBlocker is a simple plugin used to block players from using commands set in the configuration file. Useful for blocking commands such as /version and /plugins. 
 
+<p align="center">
+    <a href="https://modrinth.com/plugin/commandblocker"><img alt="modrinth" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg"></a>
+    <a href="https://www.spigotmc.org/resources/commandblocker.110684/"><img alt="spigot" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/spigot_vector.svg"></a>
+    <a href="https://hangar.papermc.io/JadedMC/CommandBlocker"><img alt="hangar" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/hangar_vector.svg"></a>
+</p>
+
+>⚠️ Looking for more advanced features, such as defining multiple different filters or sound support? Checkout [CommandBlockerPro](https://hangar.papermc.io/JadedMC/CommandBlockerPro) instead.
+
 ## Features
 * Ability to blacklist or whitelist specific commands. Can be done in-game via commands.
 * Ability to hide specific commands from tab complete without blocking them.
@@ -17,5 +25,7 @@ CommandBlocker is a simple plugin used to block players from using commands set 
 ## Support
 This plugin is still in early development. Due to this, we do not yet have any proper avenues of support set up. In the meantime, create an issue and I will respond as soon as possible.
 
-## Useful Links
-* [Plugin Statistics](https://bstats.org/plugin/bukkit/JMC%20CommandBlocker/18230)
+## bStats
+<p align="center">
+    <a href="https://bstats.org/plugin/bukkit/JMC%20CommandBlocker/18230"><img src="https://bstats.org/signatures/bukkit/JMC%20CommandBlocker.svg"/></a>
+</p>
