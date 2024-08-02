@@ -67,13 +67,6 @@ public final class CommandBlockerPlugin extends JavaPlugin {
         }
     }
 
-    public BukkitAudiences adventure() {
-        if(this.adventure == null) {
-            throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
-        }
-        return this.adventure;
-    }
-
     public SettingsManager getSettingsManager() {
         return settingsManager;
     }
