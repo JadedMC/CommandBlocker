@@ -1,6 +1,30 @@
+/*
+ * This file is part of CommandBlocker, licensed under the MIT License.
+ *
+ *  Copyright (c) JadedMC
+ *  Copyright (c) contributors
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ */
 package net.jadedmc.commandblocker.commands;
 
-import net.jadedmc.commandblocker.CommandBlocker;
+import net.jadedmc.commandblocker.CommandBlockerPlugin;
 import net.jadedmc.commandblocker.utils.ChatUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,13 +42,13 @@ import java.util.List;
  * - cb
  */
 public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
-    private final CommandBlocker plugin;
+    private final CommandBlockerPlugin plugin;
 
     /**
      * To be able to access the configuration files, we need to pass an instance of the plugin to our listener.
      * @param plugin Instance of the plugin.
      */
-    public CommandBlockerCMD(CommandBlocker plugin) {
+    public CommandBlockerCMD(@NotNull final CommandBlockerPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -37,7 +61,7 @@ public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
      * @return If the command was successful.
      */
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command, @NotNull final String label, @NotNull String[] args) {
 
         // Makes sure the sender has permission to use the command.
         if(!sender.hasPermission("commandblocker.admin")) {
@@ -51,7 +75,7 @@ public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
         }
 
         // Get the sub command used.
-        String subCommand = args[0].toLowerCase();
+       final  String subCommand = args[0].toLowerCase();
 
         switch (subCommand) {
             // Adds a command to the command list.
@@ -71,7 +95,7 @@ public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
                 }
 
                 // Adds the command to the list.
-                List<String> commands = plugin.getSettingsManager().getConfig().getStringList("Commands");
+                final List<String> commands = plugin.getSettingsManager().getConfig().getStringList("Commands");
                 commands.add(toBlock.toLowerCase());
 
                 // Reloads the config file.
@@ -90,8 +114,8 @@ public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
                 }
 
                 // Gets the intended mode to switch to.
-                String mode = args[1].toUpperCase();
-                List<String> validModes = Arrays.asList("BLACKLIST", "WHITELIST", "HIDE");
+                final String mode = args[1].toUpperCase();
+                final List<String> validModes = Arrays.asList("BLACKLIST", "WHITELIST", "HIDE");
 
                 // Makes sure the mode is valid.
                 if(!validModes.contains(mode)) {
@@ -138,7 +162,7 @@ public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
      * @return Tab completion.
      */
     @Override
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+    public List<String> onTabComplete(@NotNull final CommandSender sender, @NotNull final Command cmd, @NotNull final String label, final String[] args) {
 
         // Return an empty list if the player does not have permission.
         if(!sender.hasPermission("commandblocker.admin")) {
@@ -152,7 +176,7 @@ public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
 
         // Only check the first argument of each sub command.
         if(args.length == 2) {
-            String subCommand = args[0].toLowerCase();
+            final String subCommand = args[0].toLowerCase();
 
             // Displays tab complete for the mode sub command.
             if(subCommand.equals("mode")) {

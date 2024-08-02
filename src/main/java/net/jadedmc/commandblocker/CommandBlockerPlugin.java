@@ -33,7 +33,7 @@ import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class CommandBlocker extends JavaPlugin {
+public final class CommandBlockerPlugin extends JavaPlugin {
     private BukkitAudiences adventure;
     private SettingsManager settingsManager;
 
