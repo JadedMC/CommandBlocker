@@ -23,7 +23,11 @@ CommandBlocker is a simple plugin used to block players from using commands set 
 * Server Software with Bukkit API.
 
 ## Support
-This plugin is still in early development. Due to this, we do not yet have any proper avenues of support set up. In the meantime, create an issue and I will respond as soon as possible.
+For bug reports and feature requests we'd prefer you use the [GitHub Issue Tracker](https://github.com/JadedMC/CommandBlocker/issues). For other types of support we also now have a discord server, which you can access with the button below.
+
+<p align="center">
+    <a href="https://discord.gg/rX7sxZyPGS"><img alt="discord-plural" height="64" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/social/discord-plural_vector.svg" style="display: block; margin-left: auto; margin-right: auto;"></a>
+</p>
 
 ## bStats
 <p align="center">
