@@ -6,7 +6,7 @@
 
     <groupId>net.jadedmc</groupId>
     <artifactId>CommandBlocker</artifactId>
-    <version>1.4</version>
+    <version>1.4.1</version>
     <packaging>jar</packaging>
 
     <name>CommandBlocker</name>
