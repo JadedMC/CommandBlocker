@@ -6,7 +6,7 @@
 
     <groupId>net.jadedmc</groupId>
     <artifactId>CommandBlocker</artifactId>
-    <version>1.4</version>
+    <version>1.4.1</version>
     <packaging>jar</packaging>
 
     <name>CommandBlocker</name>
@@ -37,7 +37,11 @@
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>net.jadedmc.commandblocker.bstats</shadedPattern>
+                            <shadedPattern>net.jadedmc.commandblocker.shaded.bstats</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>net.kyori</pattern>
+                            <shadedPattern>net.jadedmc.commandblocker.shaded.adventure</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
