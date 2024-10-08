@@ -21,8 +21,12 @@ permissions:
   commandblocker.admin:
     description: Gives the player access to the main plugin command.
     default: op
+  commandblocker.bypass:
+    description: Allows the player to bypass any command filters.
+    default: op
   commandblocker.*:
     description: Gives the player all plugin permissions.
     default: false
     children:
       commandblocker.admin: true
+      commandblocker.bypass: true
