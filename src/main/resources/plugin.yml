@@ -8,6 +8,9 @@ website: http://www.jadedmc.net
 
 folia-supported: true
 
+softdepend:
+  - BetterReload
+
 commands:
   commandblocker:
     description: Main plugin command.

@@ -27,6 +27,7 @@ package net.jadedmc.commandblocker;
 import net.jadedmc.commandblocker.commands.CommandBlockerCMD;
 import net.jadedmc.commandblocker.listeners.PlayerCommandPreprocessListener;
 import net.jadedmc.commandblocker.listeners.PlayerCommandSendListener;
+import net.jadedmc.commandblocker.listeners.ReloadListener;
 import net.jadedmc.commandblocker.utils.ChatUtils;
 import net.jadedmc.commandblocker.utils.VersionUtils;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
@@ -35,6 +36,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class CommandBlockerPlugin extends JavaPlugin {
     private BukkitAudiences adventure;
+    private HookManager hookManager;
     private SettingsManager settingsManager;
 
     @Override
@@ -46,6 +48,7 @@ public final class CommandBlockerPlugin extends JavaPlugin {
         ChatUtils.setAdventure(adventure);
 
         settingsManager = new SettingsManager(this);
+        hookManager = new HookManager(this);
 
         getCommand("commandblocker").setExecutor(new CommandBlockerCMD(this));
         getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessListener(this), this);
@@ -53,6 +56,11 @@ public final class CommandBlockerPlugin extends JavaPlugin {
         // This event only exists on 1.13+.
         if(VersionUtils.getServerVersion() >= 13) {
             getServer().getPluginManager().registerEvents(new PlayerCommandSendListener(this), this);
+        }
+
+        if(this.hookManager.useBetterReload()) {
+            getLogger().info("BetterReload detected. Enabling hook...");
+            getServer().getPluginManager().registerEvents(new ReloadListener(this), this);
         }
 
         // Enables bStats statistics tracking.
@@ -65,6 +73,10 @@ public final class CommandBlockerPlugin extends JavaPlugin {
             this.adventure.close();
             this.adventure = null;
         }
+    }
+
+    public HookManager getHookManager() {
+        return this.hookManager;
     }
 
     public SettingsManager getSettingsManager() {
