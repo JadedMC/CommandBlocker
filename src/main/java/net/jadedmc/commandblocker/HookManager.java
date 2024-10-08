@@ -40,7 +40,10 @@ public class HookManager {
      */
     public HookManager(@NotNull final Plugin plugin) {
         this.hasBetterReload = plugin.getServer().getPluginManager().isPluginEnabled("BetterReload");
+        if(this.hasBetterReload) plugin.getLogger().info("BetterReload detected. Enabling hook...");
+
         this.hasPlaceholderAPI = plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI");
+        if(this.hasBetterReload) plugin.getLogger().info("PlaceholderAPI detected. Enabling hook...");
     }
 
     /**
