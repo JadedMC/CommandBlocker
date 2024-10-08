@@ -37,10 +37,11 @@ public final class CommandBlockerPlugin extends JavaPlugin {
     private HookManager hookManager;
     private SettingsManager settingsManager;
 
+    /**
+     * Runs when the plugin is enabled.
+     */
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
         // Setup chat utilities.
         ChatUtils.initialize(this);
 
@@ -48,31 +49,47 @@ public final class CommandBlockerPlugin extends JavaPlugin {
         hookManager = new HookManager(this);
 
         getCommand("commandblocker").setExecutor(new CommandBlockerCMD(this));
-        getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessListener(this), this);
 
-        // This event only exists on 1.13+.
-        if(VersionUtils.getServerVersion() >= 13) {
-            getServer().getPluginManager().registerEvents(new PlayerCommandSendListener(this), this);
-        }
-
-        if(this.hookManager.useBetterReload()) {
-            getLogger().info("BetterReload detected. Enabling hook...");
-            getServer().getPluginManager().registerEvents(new ReloadListener(this), this);
-        }
+        registerListeners();
 
         // Enables bStats statistics tracking.
         new Metrics(this, 18230);
     }
 
+    /**
+     * Runs when the plugin is disabled.
+     */
     @Override
     public void onDisable() {
+        // Disables ChatUtils. Required to prevent memory leaks with the Adventure Library.
         ChatUtils.disable();
     }
 
+    /**
+     * Registers all plugin event listeners with the server.
+     */
+    private void registerListeners() {
+        getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessListener(this), this);
+
+        // This event only exists on 1.13+.
+        if(VersionUtils.getServerVersion() >= 13) getServer().getPluginManager().registerEvents(new PlayerCommandSendListener(this), this);
+
+        // Supports BetterReload if installed.
+        if(this.hookManager.useBetterReload()) getServer().getPluginManager().registerEvents(new ReloadListener(this), this);
+    }
+
+    /**
+     * Get the Hook Manager, which returns an object that keeps track of hooks into other plugins.
+     * @return HookManager.
+     */
     public HookManager getHookManager() {
         return this.hookManager;
     }
 
+    /**
+     * Get the plugin's settings manager, which manages config files.
+     * @return Settings Manager.
+     */
     public SettingsManager getSettingsManager() {
         return settingsManager;
     }
