@@ -10,6 +10,7 @@ folia-supported: true
 
 softdepend:
   - BetterReload
+  - PlaceholderAPI
 
 commands:
   commandblocker:

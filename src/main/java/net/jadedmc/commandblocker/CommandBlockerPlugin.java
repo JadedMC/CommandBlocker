@@ -30,12 +30,10 @@ import net.jadedmc.commandblocker.listeners.PlayerCommandSendListener;
 import net.jadedmc.commandblocker.listeners.ReloadListener;
 import net.jadedmc.commandblocker.utils.ChatUtils;
 import net.jadedmc.commandblocker.utils.VersionUtils;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class CommandBlockerPlugin extends JavaPlugin {
-    private BukkitAudiences adventure;
     private HookManager hookManager;
     private SettingsManager settingsManager;
 
@@ -43,9 +41,8 @@ public final class CommandBlockerPlugin extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
 
-        // Initialize an audiences instance for the plugin
-        this.adventure = BukkitAudiences.create(this);
-        ChatUtils.setAdventure(adventure);
+        // Setup chat utilities.
+        ChatUtils.initialize(this);
 
         settingsManager = new SettingsManager(this);
         hookManager = new HookManager(this);
@@ -69,10 +66,7 @@ public final class CommandBlockerPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if(this.adventure != null) {
-            this.adventure.close();
-            this.adventure = null;
-        }
+        ChatUtils.disable();
     }
 
     public HookManager getHookManager() {

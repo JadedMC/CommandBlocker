@@ -24,23 +24,44 @@
  */
 package net.jadedmc.commandblocker.utils;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+import net.jadedmc.commandblocker.CommandBlockerPlugin;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Some methods to make sending chat messages easier.
+ * A collection of chat-related utility methods.
  */
 public class ChatUtils {
     private static BukkitAudiences adventure;
+    private static CommandBlockerPlugin plugin;
 
-    public static void setAdventure(@NotNull final BukkitAudiences adv) {
-        adventure = adv;
+    /**
+     * Creates an instance of adventure using an instance of the plugin.
+     * Called when the plugin is enabled.
+     * @param pl Instance of the plugin.
+     */
+    public static void initialize(@NotNull final CommandBlockerPlugin pl) {
+        plugin = pl;
+        adventure = BukkitAudiences.create(pl);
+    }
+
+    /**
+     * Sets the instance of adventure to null when called.
+     * Called when the plugin is disabled to prevent potential memory leaks.
+     */
+    public static void disable() {
+        if(adventure != null) {
+            adventure.close();
+            adventure = null;
+        }
     }
 
     /**
@@ -50,6 +71,22 @@ public class ChatUtils {
      */
     public static void chat(@NotNull final CommandSender sender, @NotNull final String message) {
         adventure.sender(sender).sendMessage(translate(message));
+    }
+
+    /**
+     * A quick way to send a Player a colored message.
+     * Supports PlaceholderAPI placeholders if installed.
+     * @param player Player to send message to.
+     * @param message The message being sent.
+     */
+    public static void chat(@NotNull final Player player, @NotNull String message) {
+        // Translates placeholders if needed.
+        if(plugin.getHookManager().usePlaceholderAPI()) {
+            message = PlaceholderAPI.setPlaceholders(player, message);
+        }
+
+        // Sends the message to the player.
+        adventure.sender(player).sendMessage(translate(message));
     }
 
     /**
@@ -67,6 +104,7 @@ public class ChatUtils {
      * @return Message with the color codes replaced.
      */
     public static String replaceLegacy(@NotNull String message) {
+
         // If the version is 1.16 or greater, check for hex color codes.
         if(VersionUtils.getServerVersion() >= 16) {
             Pattern pattern = Pattern.compile("&#[a-fA-F0-9]{6}");

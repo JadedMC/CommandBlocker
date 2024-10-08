@@ -32,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class HookManager {
     private final boolean hasBetterReload;
+    private final boolean hasPlaceholderAPI;
 
     /**
      * Creates the hook manager.
@@ -39,6 +40,7 @@ public class HookManager {
      */
     public HookManager(@NotNull final Plugin plugin) {
         this.hasBetterReload = plugin.getServer().getPluginManager().isPluginEnabled("BetterReload");
+        this.hasPlaceholderAPI = plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI");
     }
 
     /**
@@ -47,5 +49,13 @@ public class HookManager {
      */
     public boolean useBetterReload() {
         return this.hasBetterReload;
+    }
+
+    /**
+     * Get if the plugin should use PlaceholderAPI.
+     * @return Whether the plugin should interface with PlaceholderAPI.
+     */
+    public boolean usePlaceholderAPI() {
+        return this.hasPlaceholderAPI;
     }
 }
