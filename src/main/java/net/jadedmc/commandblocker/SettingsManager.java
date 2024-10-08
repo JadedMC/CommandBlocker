@@ -30,6 +30,8 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Manages the configurable settings in the plugin.
@@ -37,17 +39,23 @@ import java.io.IOException;
 public class SettingsManager {
     private FileConfiguration config;
     private final File configFile;
+    private final Collection<String> commands = new HashSet<>();
 
     /**
      * Loads or Creates configuration files.
      * @param plugin Instance of the plugin.
      */
-    public SettingsManager(Plugin plugin) {
+    public SettingsManager(final Plugin plugin) {
         configFile = new File(plugin.getDataFolder(), "config.yml");
         if(!configFile.exists()) {
             plugin.saveResource("config.yml", false);
         }
         config = YamlConfiguration.loadConfiguration(configFile);
+        loadCommands();
+    }
+
+    public Collection<String> getCommands() {
+        return this.commands;
     }
 
     /**
@@ -58,11 +66,23 @@ public class SettingsManager {
         return config;
     }
 
+    private void loadCommands() {
+        for(String command : this.config.getStringList("Commands")) {
+            if(!command.startsWith("/")) {
+                command = "/" + command;
+            }
+
+            this.commands.add(command);
+        }
+    }
+
     /**
      * Update the configuration file.
      */
     public void reload() {
+        this.commands.clear();
         config = YamlConfiguration.loadConfiguration(configFile);
+        loadCommands();
     }
 
     /**

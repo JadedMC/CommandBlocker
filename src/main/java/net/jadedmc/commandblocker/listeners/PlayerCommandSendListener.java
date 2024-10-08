@@ -66,7 +66,7 @@ public class PlayerCommandSendListener implements Listener {
             return;
         }
 
-        final List<String> commands = plugin.getSettingsManager().getConfig().getStringList("Commands");
+        final List<String> commands = new ArrayList<>(plugin.getSettingsManager().getCommands());
         final List<String> tablist = new ArrayList<>(event.getCommands());
 
         // Hides all commands with a ':' in them if enabled.

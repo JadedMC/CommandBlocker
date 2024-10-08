@@ -67,7 +67,7 @@ public class PlayerCommandPreprocessListener implements Listener {
         final String command = event.getMessage().split(" ")[0];
 
         if(mode.equalsIgnoreCase("blacklist")) {
-            for(final String blacklist : plugin.getSettingsManager().getConfig().getStringList("Commands")) {
+            for(final String blacklist : plugin.getSettingsManager().getCommands()) {
                 if(command.equalsIgnoreCase(blacklist)) {
                     ChatUtils.chat(event.getPlayer(), plugin.getSettingsManager().getConfig().getString("Message"));
                     event.setCancelled(true);
@@ -76,7 +76,7 @@ public class PlayerCommandPreprocessListener implements Listener {
             }
         }
         else if (mode.equalsIgnoreCase("whitelist")) {
-            for(String whitelist : plugin.getSettingsManager().getConfig().getStringList("Commands")) {
+            for(String whitelist : plugin.getSettingsManager().getCommands()) {
                 if(command.equalsIgnoreCase(whitelist)) {
                     return;
                 }
