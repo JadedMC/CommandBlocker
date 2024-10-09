@@ -65,7 +65,7 @@ public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
 
         // Makes sure the sender has permission to use the command.
         if(!sender.hasPermission("commandblocker.admin")) {
-            ChatUtils.chat(sender, plugin.getSettingsManager().getConfig().getString("Message"));
+            ChatUtils.chat(sender, plugin.getConfigManager().getConfig().getString("Message"));
             return true;
         }
 
@@ -95,13 +95,13 @@ public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
                 }
 
                 // Adds the command to the list.
-                final List<String> commands = plugin.getSettingsManager().getConfig().getStringList("Commands");
+                final List<String> commands = plugin.getConfigManager().getConfig().getStringList("Commands");
                 commands.add(toBlock.toLowerCase());
 
                 // Reloads the config file.
-                plugin.getSettingsManager().getConfig().set("Commands", commands);
-                plugin.getSettingsManager().save();
-                plugin.getSettingsManager().reloadConfig();
+                plugin.getConfigManager().getConfig().set("Commands", commands);
+                plugin.getConfigManager().saveConfig();
+                plugin.getConfigManager().reloadConfig();
 
                 ChatUtils.chat(sender, "<green><bold>CommandBlocker</bold> <dark_gray>» <green>Added <white>" + toBlock.toLowerCase() + " <green>to the command list.");
                 return true;
@@ -124,9 +124,9 @@ public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
                 }
 
                 // Reloads the config file.
-                plugin.getSettingsManager().getConfig().set("Mode", mode);
-                plugin.getSettingsManager().save();
-                plugin.getSettingsManager().reloadConfig();
+                plugin.getConfigManager().getConfig().set("Mode", mode);
+                plugin.getConfigManager().saveConfig();
+                plugin.getConfigManager().reloadConfig();
 
                 ChatUtils.chat(sender, "<green><bold>CommandBlocker</bold> <dark_gray>» <green>Changed the current mode to <white>" + mode + " <green>.");
                 return true;

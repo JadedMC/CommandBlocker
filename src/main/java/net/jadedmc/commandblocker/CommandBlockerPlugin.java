@@ -35,7 +35,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class CommandBlockerPlugin extends JavaPlugin {
     private HookManager hookManager;
-    private SettingsManager settingsManager;
+    private ConfigManager configManager;
 
     /**
      * Runs when the plugin is enabled.
@@ -45,7 +45,7 @@ public final class CommandBlockerPlugin extends JavaPlugin {
         // Setup chat utilities.
         ChatUtils.initialize(this);
 
-        settingsManager = new SettingsManager(this);
+        configManager = new ConfigManager(this);
         hookManager = new HookManager(this);
 
         getCommand("commandblocker").setExecutor(new CommandBlockerCMD(this));
@@ -66,19 +66,19 @@ public final class CommandBlockerPlugin extends JavaPlugin {
     }
 
     /**
+     * Get the plugin's settings manager, which manages config files.
+     * @return Settings Manager.
+     */
+    public ConfigManager getConfigManager() {
+        return configManager;
+    }
+
+    /**
      * Get the Hook Manager, which returns an object that keeps track of hooks into other plugins.
      * @return HookManager.
      */
     public HookManager getHookManager() {
         return this.hookManager;
-    }
-
-    /**
-     * Get the plugin's settings manager, which manages config files.
-     * @return Settings Manager.
-     */
-    public SettingsManager getSettingsManager() {
-        return settingsManager;
     }
 
     /**
@@ -98,6 +98,6 @@ public final class CommandBlockerPlugin extends JavaPlugin {
      * Reloads the plugin configuration and updates important values.
      */
     public void reload() {
-        this.settingsManager.reloadConfig();
+        this.configManager.reloadConfig();
     }
 }

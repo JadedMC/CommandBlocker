@@ -54,7 +54,7 @@ public class PlayerCommandSendListener implements Listener {
      */
     @EventHandler
     public void onCommandSend(@NotNull final PlayerCommandSendEvent event) {
-        final String mode = plugin.getSettingsManager().getConfig().getString("Mode");
+        final String mode = plugin.getConfigManager().getConfig().getString("Mode");
 
         // Don't do anything if no mode was set.
         if(mode == null) {
@@ -66,11 +66,11 @@ public class PlayerCommandSendListener implements Listener {
             return;
         }
 
-        final List<String> commands = new ArrayList<>(plugin.getSettingsManager().getCommands());
+        final List<String> commands = new ArrayList<>(plugin.getConfigManager().getCommands());
         final List<String> tablist = new ArrayList<>(event.getCommands());
 
         // Hides all commands with a ':' in them if enabled.
-        if(plugin.getSettingsManager().getConfig().getBoolean("HideColonCommands")) {
+        if(plugin.getConfigManager().getConfig().getBoolean("HideColonCommands")) {
             for(final String command : tablist) {
                 if(command.contains(":")) {
                     event.getCommands().remove(command);

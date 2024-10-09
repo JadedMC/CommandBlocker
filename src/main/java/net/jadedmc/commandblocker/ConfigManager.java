@@ -36,7 +36,7 @@ import java.util.HashSet;
 /**
  * Manages the configurable settings in the plugin.
  */
-public class SettingsManager {
+public class ConfigManager {
     private FileConfiguration config;
     private final File configFile;
     private final Collection<String> commands = new HashSet<>();
@@ -45,7 +45,7 @@ public class SettingsManager {
      * Loads or Creates configuration files.
      * @param plugin Instance of the plugin.
      */
-    public SettingsManager(final Plugin plugin) {
+    public ConfigManager(final Plugin plugin) {
         configFile = new File(plugin.getDataFolder(), "config.yml");
         if(!configFile.exists()) {
             plugin.saveResource("config.yml", false);
@@ -88,7 +88,7 @@ public class SettingsManager {
     /**
      * Saves the configuration file.
      */
-    public void save() {
+    public void saveConfig() {
         try {
             config.save(configFile);
         }

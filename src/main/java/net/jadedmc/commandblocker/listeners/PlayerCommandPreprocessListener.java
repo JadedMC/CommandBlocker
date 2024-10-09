@@ -52,7 +52,7 @@ public class PlayerCommandPreprocessListener implements Listener {
      */
     @EventHandler
     public void onCommandPreprocess(@NotNull final PlayerCommandPreprocessEvent event) {
-        final String mode = plugin.getSettingsManager().getConfig().getString("Mode");
+        final String mode = plugin.getConfigManager().getConfig().getString("Mode");
 
         // Don't block commands if
         if(mode == null || mode.equalsIgnoreCase("HIDE")) {
@@ -67,22 +67,22 @@ public class PlayerCommandPreprocessListener implements Listener {
         final String command = event.getMessage().split(" ")[0];
 
         if(mode.equalsIgnoreCase("blacklist")) {
-            for(final String blacklist : plugin.getSettingsManager().getCommands()) {
+            for(final String blacklist : plugin.getConfigManager().getCommands()) {
                 if(command.equalsIgnoreCase(blacklist)) {
-                    ChatUtils.chat(event.getPlayer(), plugin.getSettingsManager().getConfig().getString("Message"));
+                    ChatUtils.chat(event.getPlayer(), plugin.getConfigManager().getConfig().getString("Message"));
                     event.setCancelled(true);
                     break;
                 }
             }
         }
         else if (mode.equalsIgnoreCase("whitelist")) {
-            for(String whitelist : plugin.getSettingsManager().getCommands()) {
+            for(String whitelist : plugin.getConfigManager().getCommands()) {
                 if(command.equalsIgnoreCase(whitelist)) {
                     return;
                 }
             }
 
-            ChatUtils.chat(event.getPlayer(), plugin.getSettingsManager().getConfig().getString("Message"));
+            ChatUtils.chat(event.getPlayer(), plugin.getConfigManager().getConfig().getString("Message"));
             event.setCancelled(true);
         }
     }
