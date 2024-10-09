@@ -79,7 +79,7 @@ public class SettingsManager {
     /**
      * Update the configuration file.
      */
-    public void reload() {
+    public void reloadConfig() {
         this.commands.clear();
         config = YamlConfiguration.loadConfiguration(configFile);
         loadCommands();

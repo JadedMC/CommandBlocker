@@ -101,7 +101,7 @@ public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
                 // Reloads the config file.
                 plugin.getSettingsManager().getConfig().set("Commands", commands);
                 plugin.getSettingsManager().save();
-                plugin.getSettingsManager().reload();
+                plugin.getSettingsManager().reloadConfig();
 
                 ChatUtils.chat(sender, "<green><bold>CommandBlocker</bold> <dark_gray>» <green>Added <white>" + toBlock.toLowerCase() + " <green>to the command list.");
                 return true;
@@ -126,14 +126,14 @@ public class CommandBlockerCMD implements CommandExecutor, TabCompleter {
                 // Reloads the config file.
                 plugin.getSettingsManager().getConfig().set("Mode", mode);
                 plugin.getSettingsManager().save();
-                plugin.getSettingsManager().reload();
+                plugin.getSettingsManager().reloadConfig();
 
                 ChatUtils.chat(sender, "<green><bold>CommandBlocker</bold> <dark_gray>» <green>Changed the current mode to <white>" + mode + " <green>.");
                 return true;
 
             // Reloads all plugin configuration files.
             case "reload":
-                plugin.getSettingsManager().reload();
+                plugin.reload();
                 ChatUtils.chat(sender, "<green><bold>CommandBlocker</bold> <dark_gray>» <green>Configuration files reloaded successfully!");
                 return true;
 

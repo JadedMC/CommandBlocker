@@ -66,19 +66,6 @@ public final class CommandBlockerPlugin extends JavaPlugin {
     }
 
     /**
-     * Registers all plugin event listeners with the server.
-     */
-    private void registerListeners() {
-        getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessListener(this), this);
-
-        // This event only exists on 1.13+.
-        if(VersionUtils.getServerVersion() >= 13) getServer().getPluginManager().registerEvents(new PlayerCommandSendListener(this), this);
-
-        // Supports BetterReload if installed.
-        if(this.hookManager.useBetterReload()) getServer().getPluginManager().registerEvents(new ReloadListener(this), this);
-    }
-
-    /**
      * Get the Hook Manager, which returns an object that keeps track of hooks into other plugins.
      * @return HookManager.
      */
@@ -92,5 +79,25 @@ public final class CommandBlockerPlugin extends JavaPlugin {
      */
     public SettingsManager getSettingsManager() {
         return settingsManager;
+    }
+
+    /**
+     * Registers all plugin event listeners with the server.
+     */
+    private void registerListeners() {
+        getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessListener(this), this);
+
+        // This event only exists on 1.13+.
+        if(VersionUtils.getServerVersion() >= 13) getServer().getPluginManager().registerEvents(new PlayerCommandSendListener(this), this);
+
+        // Supports BetterReload if installed.
+        if(this.hookManager.useBetterReload()) getServer().getPluginManager().registerEvents(new ReloadListener(this), this);
+    }
+
+    /**
+     * Reloads the plugin configuration and updates important values.
+     */
+    public void reload() {
+        this.settingsManager.reloadConfig();
     }
 }
