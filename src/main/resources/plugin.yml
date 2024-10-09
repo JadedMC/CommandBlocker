@@ -16,6 +16,7 @@ commands:
   commandblocker:
     description: Main plugin command.
     aliases: [cb]
+    permission: commandblocker.admin
 
 permissions:
   commandblocker.admin:
