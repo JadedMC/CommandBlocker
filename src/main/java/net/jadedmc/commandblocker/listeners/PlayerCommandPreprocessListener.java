@@ -73,6 +73,19 @@ public class PlayerCommandPreprocessListener implements Listener {
                     event.setCancelled(true);
                     break;
                 }
+
+                // Checks for sub commands.
+                if(blacklist.contains(" ")) {
+                    final String fullCommand = event.getMessage().toLowerCase();
+
+                    if(fullCommand.startsWith(blacklist.toLowerCase())) {
+                        if(fullCommand.equalsIgnoreCase(blacklist) || fullCommand.startsWith(blacklist.toLowerCase() + " ")) {
+                            ChatUtils.chat(event.getPlayer(), plugin.getConfigManager().getConfig().getString("Message"));
+                            event.setCancelled(true);
+                            break;
+                        }
+                    }
+                }
             }
         }
         else if (mode.equalsIgnoreCase("whitelist")) {
