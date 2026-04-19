@@ -40,6 +40,7 @@ public class ConfigManager {
     private FileConfiguration config;
     private final File configFile;
     private final Collection<String> commands = new HashSet<>();
+    private final Collection<String> additionalCommands = new HashSet<>();
 
     /**
      * Loads or Creates configuration files.
@@ -58,6 +59,10 @@ public class ConfigManager {
         return this.commands;
     }
 
+    public Collection<String> getAdditionalCommands() {
+        return this.additionalCommands;
+    }
+
     /**
      * Get the config.yml FileConfiguration.
      * @return config.yml FileConfiguration.
@@ -74,6 +79,14 @@ public class ConfigManager {
 
             this.commands.add(command);
         }
+
+        for(String command : this.config.getStringList("AdditionalCommands")) {
+            if(command.startsWith("/")) {
+                command = command.substring(1);
+            }
+
+            this.additionalCommands.add(command);
+        }
     }
 
     /**
@@ -81,6 +94,7 @@ public class ConfigManager {
      */
     public void reloadConfig() {
         this.commands.clear();
+        this.additionalCommands.clear();
         config = YamlConfiguration.loadConfiguration(configFile);
         loadCommands();
     }

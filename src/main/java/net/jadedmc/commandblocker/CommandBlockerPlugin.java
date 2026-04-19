@@ -36,6 +36,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class CommandBlockerPlugin extends JavaPlugin {
     private HookManager hookManager;
     private ConfigManager configManager;
+    private AdditionalCommandHandler additionalCommandHandler;
 
     /**
      * Runs when the plugin is enabled.
@@ -47,6 +48,7 @@ public final class CommandBlockerPlugin extends JavaPlugin {
 
         configManager = new ConfigManager(this);
         hookManager = new HookManager(this);
+        additionalCommandHandler = new AdditionalCommandHandler(this);
 
         getCommand("commandblocker").setExecutor(new CommandBlockerCMD(this));
 
@@ -61,8 +63,16 @@ public final class CommandBlockerPlugin extends JavaPlugin {
      */
     @Override
     public void onDisable() {
+        if(additionalCommandHandler != null) {
+            additionalCommandHandler.unregisterAll();
+        }
+
         // Disables ChatUtils. Required to prevent memory leaks with the Adventure Library.
         ChatUtils.disable();
+    }
+
+    public AdditionalCommandHandler getAdditionalCommandHandler() {
+        return this.additionalCommandHandler;
     }
 
     /**
@@ -99,5 +109,8 @@ public final class CommandBlockerPlugin extends JavaPlugin {
      */
     public void reload() {
         this.configManager.reloadConfig();
+        if(this.additionalCommandHandler != null) {
+            this.additionalCommandHandler.reload();
+        }
     }
 }

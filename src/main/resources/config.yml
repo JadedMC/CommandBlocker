@@ -42,6 +42,14 @@ Commands:
   - /ver
   - /version
 
+# Additional commands to show in tab-complete suggestions.
+# Useful for custom commands that are not registered on the server but you want to appear as hints.
+# Only works in BLACKLIST and HIDE modes.
+AdditionalCommands:
+  - /help
+  - /kits
+  - /spawn
+
 # Hides all commands that have a ':' in them.
 # Such as: /bukkit:version, /minecraft:tp, etc
 HideColonCommands: false
