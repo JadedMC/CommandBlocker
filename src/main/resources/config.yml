@@ -29,6 +29,11 @@ Commands:
   - /bukkit:ver
   - /bukkit:version
   - /help
+  - /icanhasbukkit
+  - /minecraft:help
+  - /minecraft:teammsg
+  - /minecraft:tm
+  - /minecraft:trigger
   - /paper
   - /paper:paper
   - /pl
@@ -39,6 +44,9 @@ Commands:
   - /purpur:purpur
   - /spigot
   - /spigot:spigot
+  - /teammsg
+  - /tm
+  - /trigger
   - /ver
   - /version
 
