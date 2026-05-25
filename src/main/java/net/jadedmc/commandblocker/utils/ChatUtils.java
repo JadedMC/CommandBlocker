@@ -113,17 +113,13 @@ public class ChatUtils {
      * @return Message with the color codes replaced.
      */
     public static String replaceLegacy(@NotNull String message) {
+        final Pattern pattern = Pattern.compile("&#[a-fA-F0-9]{6}");
+         Matcher matcher = pattern.matcher(message);
 
-        // If the version is 1.16 or greater, check for hex color codes.
-        if(VersionUtils.getServerVersion() >= 16) {
-            Pattern pattern = Pattern.compile("&#[a-fA-F0-9]{6}");
-            Matcher matcher = pattern.matcher(message);
-
-            while (matcher.find()) {
-                String color = message.substring(matcher.start() + 1, matcher.end());
-                message = message.replace("&" + color, "<reset><color:" + color + ">");
-                matcher = pattern.matcher(message);
-            }
+        while (matcher.find()) {
+            String color = message.substring(matcher.start() + 1, matcher.end());
+            message = message.replace("&" + color, "<reset><color:" + color + ">");
+            matcher = pattern.matcher(message);
         }
 
         // Then replace legacy color codes.
